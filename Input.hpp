@@ -5,8 +5,6 @@
 
 using namespace std;
 
-
-
 class Input
 {
 public:
@@ -22,8 +20,8 @@ public:
             return false;
         }
 
-        int int_command = read_command_convert_to_int(temp[0]);
-        command = int_command;
+        command = convert_command_to_code(temp[0]);
+
         for (int i = 1; i < temp.size(); i++)
             value.push_back(temp[i]);
         return true;
@@ -35,9 +33,9 @@ public:
         value.clear();
     }
 
-   
-
 private:
     int command;
     vector<string> value;
-};
+
+    int convert_command_to_code(string);
+}

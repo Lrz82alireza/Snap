@@ -12,6 +12,14 @@ int main()
 
     while (is_running)
     {
+        try
+        {
+            /* code */
+        }
+        catch(exception& ex)
+        {
+            cout << ex.what() << '\n';
+        }
         
     }
 }
