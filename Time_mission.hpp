@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Mission.hpp>
+#include "Mission.hpp"
 
 class Time_mission : public Mission
 {
@@ -13,6 +13,7 @@ public:
     virtual bool is_completed()
     {
         cout << "fuck" << endl;
+        return false;
     }
 };
 
