@@ -5,10 +5,9 @@ void Input::set()
     string line;
     getline(cin, line);
     if (line == "")
-        return; /////////////////////
+        return;
 
     vector<string> temp = seperate_words(line, " ");
-    cout << temp.size() << endl;
     if (temp.size() == 1)
         throw runtime_error("INVALID_ARGUMENTS");
 

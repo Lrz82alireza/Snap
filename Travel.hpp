@@ -13,6 +13,8 @@ private:
     long distance;
 
 public:
+    int get_ID() { return driver_ID; }
+
     Travel(/* args */);
     ~Travel();
 };

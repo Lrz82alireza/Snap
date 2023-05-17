@@ -4,6 +4,7 @@
 
 #include "Travel.hpp"
 #include "Mission.hpp"
+#include "Functions.hpp"
 
 using namespace std;
 
@@ -15,6 +16,9 @@ private:
     vector<Travel *> travels;
 
 public:
+    int get_ID() { return ID; }
+    const vector<Mission *> &get_missions() { return missions; }
+
     Driver(int id);
     ~Driver();
 };
