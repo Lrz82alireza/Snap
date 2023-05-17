@@ -12,6 +12,7 @@ void Data_base::add_time_mission(const vector<string> *arguments)
 
     Time_mission *temp = new Time_mission(id, time, min_time);
     this->missions.push_back(temp);
+    this->missions.back()->is_completed();
 }
 
 void Data_base::init_command_manager()
@@ -24,4 +25,15 @@ void Data_base::init_command_manager()
 void Data_base::manage_command(Input * input)
 {
     this->command_manager[*(input->command_())](input->value_());
+}
+
+// constructors
+
+Data_base::Data_base(/* args */)
+{
+    this->init_command_manager();
+}
+
+Data_base::~Data_base()
+{
 }

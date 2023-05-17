@@ -19,11 +19,3 @@ public:
     ~Driver();
 };
 
-Driver::Driver(int id)
-{
-    this->ID = id;
-}
-
-Driver::~Driver()
-{
-}

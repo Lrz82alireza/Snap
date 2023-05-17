@@ -9,7 +9,7 @@
 #include "Mission.hpp"
 #include "Input.hpp"
 
-const string ADD_TIME_MISSION = "ADD_TIME_MISSION";
+const string ADD_TIME_MISSION = "add_time_mission";
 const string ADD_DISTANCE_MISSION = "ADD_DISTANCE_MISSION";
 const string ADD_COUNT_MISSION = "ADD_COUNT_MISSION";
 const string ASSIGN_MISSION = "ASSIGN_MISSION";
@@ -39,11 +39,4 @@ public:
     ~Data_base();
 };
 
-Data_base::Data_base(/* args */)
-{
-    this->init_command_manager();
-}
 
-Data_base::~Data_base()
-{
-}

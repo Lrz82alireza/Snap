@@ -1,23 +1,26 @@
-CXX = g++
-CXXFLAGS = -g -Wall
-TARGET = snapp
-SRCDIR = src
-BUILDDIR = build
-SRCS = $(wildcard $(SRCDIR)/*.cpp)
-OBJS = $(patsubst $(SRCDIR)/%.cpp, $(BUILDDIR)/%.o, $(SRCS))
+CC=g++
+CFLAGS=-c -Wall --std=c++11 
+LDFLAGS= 
 
-.PHONY: all clean
+BIN_DIR =./bin
+EXECUTABLE = $(BIN_DIR)/main
 
-all: $(TARGET)
+SOURCES=$(wildcard *.cpp)
+OBJS = $(patsubst %.cpp,$(BIN_DIR)/%.o,$(SOURCES))
+RUN_CMD=./$(EXECUTABLE)
 
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
 
-$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp | $(BUILDDIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+$(BIN_DIR)/%.o: %.cpp | $(BIN_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUILDDIR):
-	mkdir -p $@
+$(EXECUTABLE): $(OBJS) | $(BIN_DIR)
+	$(CC) $^ -o $@ $(LDFLAGS)
+
+$(BIN_DIR):
+	mkdir $(BIN_DIR)
+
+run: $(EXECUTABLE)
+	$(RUN_CMD)
 
 clean:
-	rm -rf $(BUILDDIR) $(TARGET)
+	rm -rf $(OBJS) $(EXECUTABLE) $(BIN_DIR)

@@ -17,12 +17,3 @@ public:
     virtual bool is_completed() = 0;
 };
 
-Mission::Mission(int id, pair<long, long> time_)
-{
-    this->ID = id;
-    this->time = time_; 
-}
-
-Mission::~Mission()
-{
-}
