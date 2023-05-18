@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <functional>
 
 #include "Travel.hpp"
 #include "Mission.hpp"
@@ -19,8 +20,11 @@ public:
     int get_ID() { return ID; }
     const vector<Mission *> &get_missions() { return missions; }
     void set_mission(const Mission * mission_);
+    void record_ride(const pair<long, long> &time_, const long &distance_);
 
     Driver(int id);
     ~Driver();
 };
 
+template <typename T>
+void sort_by_id(vector<T *> &Ts);

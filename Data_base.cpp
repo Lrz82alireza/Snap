@@ -127,9 +127,15 @@ Arg_rec Data_base::make_record_arg(const vector<string> *arguments)
 
 void Data_base::record_ride(const vector<string> *arguments)
 {
-    // check
+    check_record_arg(arguments);
 
     Arg_rec arg = make_record_arg(arguments);
+
+    // asl kar
+    Driver * driver_ = find_by_id<Driver>(arg.driver_id, this->drivers);
+    driver_->record_ride(arg.time_, arg.distance);
+    
+    //////////
 
     cout << "OK" << endl;
 }
@@ -148,7 +154,9 @@ void Data_base::check_record_arg(const vector<string> *arguments)
     if (driver_ == NULL)
         throw runtime_error("DRIVER_NOT_FOUND");
 
-    
+    int distance_ = stoi((*arguments)[DISTANCE_REC]);
+    if (distance_ < 0)
+        throw runtime_error("INVALID_ARGUMENTS");
 }
 
 void Data_base::init_command_manager()

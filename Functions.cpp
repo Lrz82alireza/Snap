@@ -13,3 +13,9 @@ vector<string> seperate_words(const string line, string separate_char)
     words.push_back(temp);
     return words;
 }
+
+template <typename T>
+bool sort_by_id(T t1, T t2)
+{
+    return t1.get_ID < t2.get_ID;
+}
