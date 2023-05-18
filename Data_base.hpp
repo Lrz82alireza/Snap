@@ -28,8 +28,19 @@ enum
     DRIVER_ID_ASSIGN
 };
 
+// record_arguments_placement
+
+enum
+{
+    START_TIME_REC,
+    END_TIME_REC,
+    DRIVER_ID_REC,
+    DISTANCE_REC
+};
+
 const int ADD_ARG_NUM = 5;
 const int ASSIGN_ARG_NUM = 2;
+const int REC_ARG_NUM = 4;
 
 const string ADD_TIME_MISSION = "add_time_mission";
 const string ADD_DISTANCE_MISSION = "add_distance_mission";
@@ -56,6 +67,14 @@ typedef struct ARG_ADD
     long reward;
 } Arg_add;
 
+typedef struct ARG_REC
+{
+    int driver_id;
+    pair<long, long> time_;
+    long distance;
+}Arg_rec;
+
+
 class Data_base
 {
 private:
@@ -80,6 +99,11 @@ private:
     Arg_assign make_assign_arg(const vector<string> *arguments);
     void assign_mission(const vector<string> *arguments);
     void check_assign_arg(const vector<string> *arguments);
+
+    // RECORD_RIDE
+    Arg_rec make_record_arg(const vector<string> *arguments);
+    void record_ride(const vector<string> *arguments);
+    void check_record_arg(const vector<string> *arguments);
 
     template <typename T>
     T *find_by_id(int id,const vector<T *> &Ts);

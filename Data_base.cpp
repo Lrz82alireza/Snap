@@ -114,6 +114,43 @@ void Data_base::check_assign_arg(const vector<string> *arguments)
         throw runtime_error("DUPLICATE_DRIVER_MISSION");
 }
 
+Arg_rec Data_base::make_record_arg(const vector<string> *arguments)
+{
+    Arg_rec arg;
+
+    arg.distance = stol((*arguments)[DISTANCE_REC]);
+    arg.driver_id = stoi((*arguments)[DRIVER_ID_REC]);
+    arg.time_ = {stol((*arguments)[START_TIME_REC]) ,stol((*arguments)[END_TIME_REC])};
+
+    return arg;
+}
+
+void Data_base::record_ride(const vector<string> *arguments)
+{
+    // check
+
+    Arg_rec arg = make_record_arg(arguments);
+
+    cout << "OK" << endl;
+}
+
+void Data_base::check_record_arg(const vector<string> *arguments)
+{
+    if ((*arguments).size() != REC_ARG_NUM)
+        throw runtime_error("INVALID_ARGUMENTS");
+
+    pair<long, long> time_(stol((*arguments)[START_TIME_REC]), stol((*arguments)[END_TIME_REC]));
+    if (!is_time_valid(&time_))
+        throw runtime_error("INVALID_ARGUMENTS");
+    
+    int driver_id = stoi((*arguments)[DRIVER_ID_REC]);
+    Driver * driver_ = find_by_id<Driver>(driver_id, this->drivers);
+    if (driver_ == NULL)
+        throw runtime_error("DRIVER_NOT_FOUND");
+
+    
+}
+
 void Data_base::init_command_manager()
 {
     command_manager[ADD_TIME_MISSION] = bind(&Data_base::add_time_mission, this, std::placeholders::_1);
@@ -121,6 +158,7 @@ void Data_base::init_command_manager()
     command_manager[ADD_COUNT_MISSION] = bind(&Data_base::add_count_mission, this, std::placeholders::_1);
 
     command_manager[ASSIGN_MISSION] = bind(&Data_base::assign_mission, this, std::placeholders::_1);
+    command_manager[RECORD_RIDE] = bind(&Data_base::record_ride, this, std::placeholders::_1);
 }
 
 bool Data_base::is_time_valid(const pair<long, long> *time_)
