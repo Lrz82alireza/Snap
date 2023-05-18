@@ -69,8 +69,27 @@ void Data_base::add_mission(const vector<string> *arguments)
 
 // Accessories
 
+Arg_assign Data_base::make_assign_arg(const vector<string> *arguments)
+{
+    Arg_assign arg;
+
+    arg.driver_id = stoi((*arguments)[DRIVER_ID_ASSIGN]);
+    arg.mission_id = stoi((*arguments)[MISSION_ID_ASSIGN]);
+
+    return arg;
+}
+
 void Data_base::assign_mission(const vector<string> *arguments)
 {
+    check_assign_arg(arguments);
+
+    Arg_assign arg = make_assign_arg(arguments);
+
+    Driver * driver_ = find_by_id<Driver>(arg.driver_id, drivers);
+    Mission * mission_ = find_by_id<Mission>(arg.mission_id, missions);
+    driver_->set_mission(mission_);
+
+    cout << "OK" << endl;
 }
 
 void Data_base::check_assign_arg(const vector<string> *arguments)
@@ -86,9 +105,13 @@ void Data_base::check_assign_arg(const vector<string> *arguments)
     int driver_id = stoi((*arguments)[DRIVER_ID_ASSIGN]);
     Driver *driver_ = find_by_id<Driver>(driver_id, this->drivers);
     if (driver_ == NULL)
+    {
         driver_ = new Driver(driver_id);
+        this->drivers.push_back(driver_);
+    }
 
-    
+    if (find_by_id<Mission>(mission_id, driver_->get_missions()) != NULL)
+        throw runtime_error("DUPLICATE_DRIVER_MISSION");
 }
 
 void Data_base::init_command_manager()
@@ -116,6 +139,17 @@ void Data_base::manage_command(Input *input)
     this->command_manager[*(input->command_())](input->value_());
 }
 
+template <typename T>
+T *Data_base::find_by_id(int id,const vector<T *> &Ts)
+{
+    for (typename vector<T *>::size_type i = 0; i < Ts.size(); i++)
+    {
+        if (Ts[i]->get_ID() == id)
+            return Ts[i];
+    }
+    return NULL;
+}
+
 // constructors
 
 Data_base::Data_base(/* args */)
@@ -125,6 +159,7 @@ Data_base::Data_base(/* args */)
 
 Data_base::~Data_base()
 {
-    for (vector<Mission *>::size_type i = 0; i < this->missions.size(); i++)
-        delete missions[i];
+    for (Mission* mission : missions) {
+    delete mission;
+}
 }

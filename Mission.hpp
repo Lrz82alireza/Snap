@@ -15,9 +15,11 @@ private:
 
 public:
     int get_ID() { return ID; }
+    virtual Mission * clone() const = 0;
 
     Mission(int id, pair<long, long> time_, long reward_);
-    ~Mission();
+
+    virtual ~Mission();
     virtual bool is_completed() = 0;
 };
 

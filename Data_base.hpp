@@ -3,13 +3,13 @@
 #include <map>
 #include <functional>
 
+#include "Input.hpp"
 #include "Driver.hpp"
 #include "Travel.hpp"
 #include "Time_mission.hpp"
 #include "Distance_mission.hpp"
 #include "Count_mission.hpp"
 #include "Mission.hpp"
-#include "Input.hpp"
 
 // add_arguments_placement
 enum
@@ -60,7 +60,6 @@ class Data_base
 {
 private:
     vector<Driver *> drivers;
-    vector<Travel *> travels;
     vector<Mission *> missions;
 
     map<string, function<void(const vector<string> *)>> command_manager;
@@ -78,8 +77,12 @@ private:
     void add_mission(const vector<string> *arguments);
 
     // ASSIGN_MISSION
+    Arg_assign make_assign_arg(const vector<string> *arguments);
     void assign_mission(const vector<string> *arguments);
     void check_assign_arg(const vector<string> *arguments);
+
+    template <typename T>
+    T *find_by_id(int id,const vector<T *> &Ts);
 
 public:
     void manage_command(Input *input);

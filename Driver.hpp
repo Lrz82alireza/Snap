@@ -18,6 +18,7 @@ private:
 public:
     int get_ID() { return ID; }
     const vector<Mission *> &get_missions() { return missions; }
+    void set_mission(const Mission * mission_);
 
     Driver(int id);
     ~Driver();

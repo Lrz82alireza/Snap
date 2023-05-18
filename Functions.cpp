@@ -13,14 +13,3 @@ vector<string> seperate_words(const string line, string separate_char)
     words.push_back(temp);
     return words;
 }
-
-template <typename T>
-T *find_by_id(int id, vector<T *> &Ts)
-{
-    for (typename vector<T *>::size_type i = 0; i < Ts.size(); i++)
-    {
-        if (Ts[i]->get_ID() == id)
-            return missions[i];
-    }
-    return NULL;
-}

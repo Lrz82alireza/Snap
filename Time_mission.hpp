@@ -12,6 +12,7 @@ public:
     ~Time_mission();
     virtual bool is_completed();
 
+    virtual Time_mission * clone() const { return new Time_mission(*this); }
 };
 
 
