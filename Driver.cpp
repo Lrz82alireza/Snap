@@ -22,6 +22,7 @@ void Driver::record_ride(pair<long, long> &time_, const long &distance_)
         {
             mission_->status = true;
             mission_->print();
+            cout << endl;
         }
     }
 }
@@ -37,9 +38,11 @@ void Driver::show_missions_status()
     for (auto mission_ : missions)
     {
         mission_->print();
+        cout << "status: ";
         if (mission_->status)
             cout << "completed" << endl;
-        cout << "ongoing" << endl;
+        else
+            cout << "ongoing" << endl;
         cout << endl;
     }
 }

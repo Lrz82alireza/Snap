@@ -5,7 +5,7 @@ void Mission::print()
     cout << "mission: " << this->ID << endl <<
     "start timestamp: " << this->time.first << endl <<
     "end timestamp: " << this->time.second << endl <<
-    "reward: " << this->reward << endl << endl;
+    "reward: " << this->reward << endl;
 }
 
 bool Mission::has_timestamp(const pair<long, long> &time_)

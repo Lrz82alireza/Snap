@@ -134,8 +134,6 @@ void Data_base::record_ride(const vector<string> *arguments)
     // asl kar
     Driver * driver_ = find_by_id<Driver>(arg.driver_id, this->drivers);
     driver_->record_ride(arg.time_, arg.distance);
-
-    cout << "OK" << endl;
 }
 
 void Data_base::check_record_arg(const vector<string> *arguments)
