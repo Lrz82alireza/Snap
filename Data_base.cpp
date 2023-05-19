@@ -29,8 +29,11 @@ void Data_base::check_add_arg(const vector<string> *arguments)
     if (!is_time_valid(&time_))
         throw runtime_error("INVALID_ARGUMENTS");
 
-    long reward = stol((*arguments)[REWARD_ADD]);
+    long target = stol((*arguments)[TARGET_ADD]);
+    if (target < 0)    
+        throw runtime_error("INVALID_ARGUMENTS");
 
+    long reward = stol((*arguments)[REWARD_ADD]);
     if (reward < 0)
         throw runtime_error("INVALID_ARGUMENTS");
 }
@@ -65,6 +68,7 @@ void Data_base::add_mission(const vector<string> *arguments)
 
     T *temp = new T(arg.id, arg.time_, arg.target, arg.reward);
     this->missions.push_back(temp);
+
 }
 
 // Accessories

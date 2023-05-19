@@ -2,8 +2,6 @@
 
 void Input::set()
 {
-    string line;
-    getline(cin, line);
     if (line == "")
         return;
 
@@ -15,10 +13,19 @@ void Input::set()
 
     for (vector<string>::size_type i = 1; i < temp.size(); i++)
         value.push_back(temp[i]);
+
 }
 
 void Input::clear()
 {
     command.clear();
     value.clear();
+    line.clear();
+}
+
+bool Input::get_line()
+{
+    if (getline(cin, line))
+        return true;
+    return false;
 }

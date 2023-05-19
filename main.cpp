@@ -11,7 +11,7 @@ int main()
     Input input;
     Data_base data_base;
 
-    while (input.is_running_())
+    while (input.get_line())
     {
         try
         {

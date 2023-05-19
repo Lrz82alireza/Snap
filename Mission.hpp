@@ -15,9 +15,11 @@ private:
 public:
     bool status = false;
 
+    int get_ID() { return ID; }
+    pair<long, long> get_time() { return time; }
+
     void print();
     bool has_timestamp(const pair<long, long> &time_);
-    int get_ID() { return ID; }
     virtual Mission * clone() const = 0;
 
     Mission(int id, pair<long, long> time_, long reward_);

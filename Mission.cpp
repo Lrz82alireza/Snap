@@ -2,7 +2,7 @@
 
 void Mission::print()
 {
-    cout << "mission: " << this->ID << endl <<
+    cout << "mission " << this->ID << ":"<< endl <<
     "start timestamp: " << this->time.first << endl <<
     "end timestamp: " << this->time.second << endl <<
     "reward: " << this->reward << endl;
