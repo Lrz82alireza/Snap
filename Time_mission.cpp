@@ -1,7 +1,11 @@
 #include "Time_mission.hpp"
 
-bool Time_mission::is_completed()
+bool Time_mission::is_completed(pair<long, long> &time_, long distance_)
 {
+    this->passed_time += (time_.second - time_.first);
+
+    if (passed_time >= min_time)
+        return true;
     return false;
 }
 

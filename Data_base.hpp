@@ -29,7 +29,6 @@ enum
 };
 
 // record_arguments_placement
-
 enum
 {
     START_TIME_REC,
@@ -38,9 +37,16 @@ enum
     DISTANCE_REC
 };
 
+// show_mission_status argument placement
+enum
+{
+    DRIVER_ID_SHOW,
+};
+
 const int ADD_ARG_NUM = 5;
 const int ASSIGN_ARG_NUM = 2;
 const int REC_ARG_NUM = 4;
+const int SHOW_ARG_NUM = 1;
 
 const string ADD_TIME_MISSION = "add_time_mission";
 const string ADD_DISTANCE_MISSION = "add_distance_mission";
@@ -105,6 +111,10 @@ private:
     void record_ride(const vector<string> *arguments);
     void check_record_arg(const vector<string> *arguments);
 
+    // SHOW_MISSION_STATUS
+    void check_show_arg(const vector<string> *arguments);
+    void show_missions_status(const vector<string> *arguments);
+    
     template <typename T>
     T *find_by_id(int id,const vector<T *> &Ts);
 

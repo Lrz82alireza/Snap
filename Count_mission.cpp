@@ -1,7 +1,10 @@
 #include "Count_mission.hpp"
 
-bool Count_mission::is_completed()
+bool Count_mission::is_completed(pair<long, long> &time_, long distance_)
 {
+    this->counted += 1;
+    if (counted >= min_count)
+        return true;
     return false;
 }
 

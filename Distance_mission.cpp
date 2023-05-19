@@ -1,7 +1,10 @@
 #include "Distance_mission.hpp"
 
-bool Distance_mission::is_completed()
+bool Distance_mission::is_completed(pair<long, long> &time_, long distance_)
 {
+    this->passed_dis += distance_;
+    if (passed_dis >= min_dis)
+        return true;
     return false;
 }
 

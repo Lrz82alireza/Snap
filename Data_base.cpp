@@ -134,8 +134,6 @@ void Data_base::record_ride(const vector<string> *arguments)
     // asl kar
     Driver * driver_ = find_by_id<Driver>(arg.driver_id, this->drivers);
     driver_->record_ride(arg.time_, arg.distance);
-    
-    //////////
 
     cout << "OK" << endl;
 }
@@ -159,6 +157,26 @@ void Data_base::check_record_arg(const vector<string> *arguments)
         throw runtime_error("INVALID_ARGUMENTS");
 }
 
+void Data_base::check_show_arg(const vector<string> *arguments)
+{
+    if ((*arguments).size() != SHOW_ARG_NUM)
+         throw runtime_error("INVALID_ARGUMENTS");
+
+    int driver_id = stoi((*arguments)[DRIVER_ID_SHOW]);
+    Driver * driver_ = find_by_id<Driver>(driver_id, drivers);
+    if (driver_ == NULL)
+        throw runtime_error("DRIVER_NOT_FOUND");
+}
+
+void Data_base::show_missions_status(const vector<string> *arguments)
+{
+    check_show_arg(arguments);
+
+    int driver_id = stoi((*arguments)[DRIVER_ID_SHOW]);
+    Driver * driver_ = find_by_id<Driver>(driver_id, drivers);
+    driver_->show_missions_status();
+}
+
 void Data_base::init_command_manager()
 {
     command_manager[ADD_TIME_MISSION] = bind(&Data_base::add_time_mission, this, std::placeholders::_1);
@@ -167,6 +185,8 @@ void Data_base::init_command_manager()
 
     command_manager[ASSIGN_MISSION] = bind(&Data_base::assign_mission, this, std::placeholders::_1);
     command_manager[RECORD_RIDE] = bind(&Data_base::record_ride, this, std::placeholders::_1);
+
+    command_manager[SHOW_MISSIONS_STATUS] = bind(&Data_base::show_missions_status, this, std::placeholders::_1);
 }
 
 bool Data_base::is_time_valid(const pair<long, long> *time_)
